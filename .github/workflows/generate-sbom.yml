@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       repositories:
-        description: "https://github.com/gayathri02-02/project1.git, https://github.com/gayathri02-02/project2.git, https://github.com/gayathri02-02/project3.git"
+        description: "https://github.com/premchandoffice/integration-github-actions.git"
         required: true
         type: string
 
