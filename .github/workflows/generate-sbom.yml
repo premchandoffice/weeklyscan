@@ -1,0 +1,78 @@
+name: Generate CycloneDX SBOM
+
+on:
+  workflow_dispatch:
+    inputs:
+      repositories:
+        description: "https://github.com/gayathri02-02/project1.git, https://github.com/gayathri02-02/project2.git, https://github.com/gayathri02-02/project3.git"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Install Git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+
+      - name: Install scanoss-py
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install scanoss
+
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      - name: Generate CycloneDX SBOMs
+        shell: bash
+        run: |
+
+          TODAY=$(date +%F)
+
+          IFS=',' read -ra REPOS <<< "${{ github.event.inputs.repositories }}"
+
+          for REPO in "${REPOS[@]}"
+          do
+            REPO=$(echo "$REPO" | xargs)
+
+            NAME=$(basename "$REPO" .git)
+
+            echo "=================================="
+            echo "Scanning: $NAME"
+            echo "=================================="
+
+            git clone --depth 1 "$REPO" "$NAME"
+
+            scanoss-py scan \
+              "$NAME" \
+              --format cyclonedx \
+              --output "reports/${TODAY}_${NAME}.cdx.json"
+
+            rm -rf "$NAME"
+
+          done
+
+      - name: Commit Reports
+        run: |
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add reports
+
+          if git diff --cached --quiet
+          then
+            echo "No changes."
+          else
+            git commit -m "Add CycloneDX SBOM reports"
+            git push
+          fi
