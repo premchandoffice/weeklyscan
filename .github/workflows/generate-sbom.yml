@@ -2,11 +2,7 @@ name: Generate CycloneDX SBOM
 
 on:
   workflow_dispatch:
-    inputs:
-      repositories:
-        description: "https://github.com/premchandoffice/integration-github-actions.git"
-        required: true
-        type: string
+    
 
 permissions:
   contents: write
@@ -38,10 +34,13 @@ jobs:
 
           TODAY=$(date +%F)
 
-          IFS=',' read -ra REPOS <<< "${{ github.event.inputs.repositories }}"
-
+          REPOS=(
+          "https://github.com/premchandoffice/integration-github-actions.git"
+          "https://github.com/gayathri02-02/project1.git"
+          )
           for REPO in "${REPOS[@]}"
           do
+
             REPO=$(echo "$REPO" | xargs)
 
             NAME=$(basename "$REPO" .git)
