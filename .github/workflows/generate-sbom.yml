@@ -71,6 +71,8 @@ jobs:
             echo "Generating CBOM..."
 
             crypto-finder scan \
+              --no-remote-rules \
+              --rules-dir ./rules \
               --format cyclonedx \
               --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
               "$NAME"
