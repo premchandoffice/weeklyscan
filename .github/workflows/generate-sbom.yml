@@ -29,8 +29,14 @@ jobs:
           python3 -m pip install --upgrade pip
           pip3 install scanoss
 
+      - name: Install Crypto Finder
+        run: |
+          go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
       - name: Create reports directory
-        run: mkdir -p reports
+        run: mkdir -p reports/SBOM
+             mkdir -p reports/CBOM
 
       - name: Generate CycloneDX SBOMs
         shell: bash
@@ -54,11 +60,20 @@ jobs:
             echo "=================================="
 
             git clone --depth 1 "$REPO" "$NAME"
+            
+            echo "Generating SBOM..."
 
             scanoss-py scan \
               "$NAME" \
               --format cyclonedx \
-              --output "reports/${TODAY}_${NAME}.cdx.json"
+              --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
+              
+            echo "Generating CBOM..."
+
+            crypto-finder scan \
+              --format cyclonedx \
+              --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
+              "$NAME"
 
             rm -rf "$NAME"
 
@@ -76,6 +91,6 @@ jobs:
           then
             echo "No changes."
           else
-            git commit -m "Add CycloneDX SBOM reports"
+            git commit -m "Add CycloneDX BOM reports"
             git push
           fi
