@@ -1,0 +1,78 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:077ed279-c413-4340-8d27-dc92c276b662",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-16T13:47:45Z",
+    "tools": [
+      {
+        "vendor": "SCANOSS",
+        "name": "scanoss-py",
+        "version": "1.54.1"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "NOASSERTION",
+      "version": "NOASSERTION"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "proxy-git.cwkhome.fun/nanovms/ops",
+      "publisher": "",
+      "version": "v0.0.0-20250629195313-b0ff68772e84",
+      "purl": "pkg:golang/proxy-git.cwkhome.fun/nanovms/ops",
+      "bom-ref": "pkg:golang/proxy-git.cwkhome.fun/nanovms/ops",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mygithub.libinneed.workers.dev/nanovms/ops",
+      "publisher": "",
+      "version": "v0.0.0-20260122055000-354433015a9c",
+      "purl": "pkg:golang/mygithub.libinneed.workers.dev/nanovms/ops",
+      "bom-ref": "pkg:golang/mygithub.libinneed.workers.dev/nanovms/ops",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ops",
+      "publisher": "nanovms",
+      "version": "0.5",
+      "purl": "pkg:github/nanovms/ops",
+      "bom-ref": "pkg:github/nanovms/ops",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "github.hscsec.cn/nanovms/ops",
+      "publisher": "",
+      "version": "v0.0.0-20240219165706-6db8fe98e91e",
+      "purl": "pkg:golang/github.hscsec.cn/nanovms/ops",
+      "bom-ref": "pkg:golang/github.hscsec.cn/nanovms/ops",
+      "licenses": []
+    }
+  ],
+  "vulnerabilities": []
+}
