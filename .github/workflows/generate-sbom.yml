@@ -1,11 +1,12 @@
 name: Generate CycloneDX SBOM
 
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: "0 1 * * 5" 
+    - cron: "0 1 * * 5"
+
+  repository_dispatch:
+    types:
+      - run-sbom-scan
 
 permissions:
   contents: write
