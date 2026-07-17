@@ -79,11 +79,11 @@ jobs:
               
             echo "Generating CBOM..."
 
-            crypto-finder scan \
+           /* crypto-finder scan \
               --timeout 30m \
               --format cyclonedx \
               --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
-              "$NAME"
+              "$NAME" */
 
             rm -rf "$NAME"
 
