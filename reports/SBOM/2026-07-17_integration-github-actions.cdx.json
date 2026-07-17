@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:554d2342-be82-438e-a936-6ef375d4deec",
+  "serialNumber": "urn:uuid:84a69a6f-a636-4681-8811-bc3b61faf843",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-17T09:26:47Z",
+    "timestamp": "2026-07-17T11:02:41Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -21,53 +21,12 @@
   "components": [
     {
       "type": "library",
-      "name": "freebsd-src",
-      "publisher": "FreeBSD",
-      "version": "release/2.0_cvs",
-      "purl": "pkg:codeberg/freebsd/freebsd-src",
-      "bom-ref": "pkg:codeberg/freebsd/freebsd-src",
-      "licenses": [
-        {
-          "license": {
-            "id": "BSD-2-Clause"
-          }
-        },
-        {
-          "license": {
-            "id": "CDDL-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "GPL-3.0-only"
-          }
-        },
-        {
-          "license": {
-            "name": "GPL-2.0 WITH Linux-syscall-note"
-          }
-        },
-        {
-          "license": {
-            "name": "Apache-2.0 WITH LLVM-exception"
-          }
-        },
-        {
-          "license": {
-            "id": "MPL-2.0"
-          }
-        },
-        {
-          "license": {
-            "id": "MIT"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ]
+      "name": "examples",
+      "publisher": "SRIRAM",
+      "version": "0",
+      "purl": "pkg:cpan/SRIRAM/examples",
+      "bom-ref": "pkg:cpan/SRIRAM/examples",
+      "licenses": []
     },
     {
       "type": "library",
