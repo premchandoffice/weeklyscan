@@ -1,0 +1,77 @@
+name: Generate CycloneDX SBOM
+
+on:
+  schedule:
+    - cron: "0 1 * * 5"
+
+  repository_dispatch:
+    types:
+      - run-sbom-scan
+
+permissions:
+  contents: write
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Install scanoss-py
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install scanoss
+
+      - name: Create reports directory
+        run: mkdir -p reports/SBOM
+             mkdir -p reports/CBOM
+
+      - name: Generate CycloneDX SBOMs
+        shell: bash
+        run: |
+
+          TODAY=$(date +%F)
+
+          REPOS=(
+          "https://github.com/premchandoffice/integration-github-actions.git"
+          "https://github.com/gayathri02-02/project1.git"
+          )
+          for REPO in "${REPOS[@]}"
+          do
+
+            REPO=$(echo "$REPO" | xargs)
+
+            NAME=$(basename "$REPO" .git)
+
+            echo "=================================="
+            echo "Scanning: $NAME"
+            echo "=================================="
+
+            git clone --depth 1 "$REPO" "$NAME"
+
+            scanoss-py scan \
+              "$NAME" \
+              --format cyclonedx \
+              --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
+
+            rm -rf "$NAME"
+
+          done
+
+      - name: Commit Reports
+        run: |
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add reports
+
+          if git diff --cached --quiet
+          then
+            echo "No changes."
+          else
+            git commit -m "Add CycloneDX SBOM reports"
+            git push
+          fi
