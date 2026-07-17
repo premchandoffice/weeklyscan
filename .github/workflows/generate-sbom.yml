@@ -2,7 +2,7 @@ name: Generate CycloneDX SBOM
 
 on:
   schedule:
-    - cron: "46 * * * *"
+    - cron: "*/2 * * * *"
 
   repository_dispatch:
     types:
