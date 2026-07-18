@@ -1,0 +1,54 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:3b17e55e-e8e9-49a5-ac16-be3bc6c57a44",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-18T00:00:08Z",
+    "tools": [
+      {
+        "vendor": "SCANOSS",
+        "name": "scanoss-py",
+        "version": "1.54.1"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "NOASSERTION",
+      "version": "NOASSERTION"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "PDL",
+      "publisher": "LUKKA",
+      "version": "1.92_03",
+      "purl": "pkg:cpan/LUKKA/PDL",
+      "bom-ref": "pkg:cpan/LUKKA/PDL",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "scanoss.js",
+      "publisher": "scanoss",
+      "version": "v0.11.1",
+      "purl": "pkg:github/scanoss/scanoss.js",
+      "bom-ref": "pkg:github/scanoss/scanoss.js",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  ],
+  "vulnerabilities": []
+}
