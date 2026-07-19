@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:91b8910a-2be0-4ec8-b87a-32f00e283021",
+  "serialNumber": "urn:uuid:f886e117-18a9-4ecf-a896-c8cb6025fbbf",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-19T11:42:04Z",
+    "timestamp": "2026-07-19T12:34:44Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -19,21 +19,6 @@
     }
   },
   "components": [
-    {
-      "type": "library",
-      "name": "ops",
-      "publisher": "nanovms",
-      "version": "0.5",
-      "purl": "pkg:github/nanovms/ops",
-      "bom-ref": "pkg:github/nanovms/ops",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ]
-    },
     {
       "type": "library",
       "name": "proxy-git.cwkhome.fun/nanovms/ops",
@@ -56,6 +41,21 @@
       "version": "v0.0.0-20260122055000-354433015a9c",
       "purl": "pkg:golang/mygithub.libinneed.workers.dev/nanovms/ops",
       "bom-ref": "pkg:golang/mygithub.libinneed.workers.dev/nanovms/ops",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ops",
+      "publisher": "nanovms",
+      "version": "0.5",
+      "purl": "pkg:github/nanovms/ops",
+      "bom-ref": "pkg:github/nanovms/ops",
       "licenses": [
         {
           "license": {
