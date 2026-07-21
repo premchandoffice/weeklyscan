@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:df599d0c-3c0b-4299-a180-6d3fc8d020d3",
+  "serialNumber": "urn:uuid:0083f79a-c108-4ebf-8c7b-171f84f51774",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-21T20:58:36Z",
+    "timestamp": "2026-07-21T21:59:43Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -30,11 +30,6 @@
         {
           "license": {
             "id": "Apache-2.0"
-          }
-        },
-        {
-          "license": {
-            "id": "GPL-3.0-only"
           }
         }
       ]
