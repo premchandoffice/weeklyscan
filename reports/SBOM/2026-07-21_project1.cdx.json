@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:9372ff77-2095-4ef6-80c5-7bf6a94318ce",
+  "serialNumber": "urn:uuid:5b3b2d93-af2e-4688-9506-40b7f35c668d",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-21T10:49:16Z",
+    "timestamp": "2026-07-21T12:13:02Z",
     "tools": [
       {
         "vendor": "SCANOSS",
