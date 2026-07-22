@@ -1,14 +1,7 @@
-name: Generate CBOM
+name: Generate CycloneDX CBOM
 
 on:
   workflow_dispatch:
-
-  schedule:
-    - cron: "*/5 * * * *"
-
-  repository_dispatch:
-    types:
-      - run-cbom-scan
 
 permissions:
   contents: write
@@ -18,39 +11,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
+      - uses: actions/setup-go@v5
         with:
           go-version: "1.22"
+
       - name: Install OpenGrep
         run: |
-          curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.12.1/install.sh | bash
-      
-          which opengrep || true
-          find $HOME -name opengrep
+          curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.25.0/install.sh | bash
+
+          echo "$HOME/.opengrep/cli/latest" >> $GITHUB_PATH
 
       - name: Install CryptoFinder
         run: |
           go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
-      - name: Show CryptoFinder Version
+      - name: Verify Installation
         run: |
-          crypto-finder version || true
+          export PATH="$HOME/.opengrep/cli/latest:$PATH"
 
-      - name: Create CBOM Directory
+          which opengrep
+          opengrep --version
+
+          which crypto-finder
+          crypto-finder version
+
+      - name: Create Output Directory
         run: |
           mkdir -p reports/CBOM
 
-      - name: Generate CBOMs
-        shell: bash
+      - name: Generate CBOM
         env:
           SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
         run: |
-          set -e
+          export PATH="$HOME/.opengrep/cli/latest:$PATH"
 
           TODAY=$(date +%F)
 
@@ -61,43 +57,28 @@ jobs:
 
           for REPO in "${REPOS[@]}"
           do
-            REPO=$(echo "$REPO" | xargs)
             NAME=$(basename "$REPO" .git)
-
-            echo "=================================="
-            echo "Scanning: $NAME"
-            echo "=================================="
-
-            rm -rf "$NAME"
 
             git clone --depth 1 "$REPO" "$NAME"
 
             crypto-finder scan \
-              "$NAME" \
-              --output "reports/CBOM/${TODAY}_${NAME}_cbom.json"
+              --api-key "$SCANOSS_API_KEY" \
+              --format cyclonedx \
+              --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
+              "$NAME"
 
             rm -rf "$NAME"
-
           done
 
-      - name: Upload CBOM Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: cbom-reports
-          path: reports/CBOM
-          retention-days: 90
-
-      - name: Commit CBOM Reports
+      - name: Commit Reports
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
           git add reports/CBOM
 
-          if git diff --cached --quiet
+          if ! git diff --cached --quiet
           then
-            echo "No changes."
-          else
-            git commit -m "Update CBOM reports ($(date +%F))"
+            git commit -m "Update CBOM reports"
             git push
           fi
