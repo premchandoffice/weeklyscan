@@ -1,4 +1,4 @@
-name: Generate SBOM and CBOM
+name: Generate CBOM
 
 on:
   workflow_dispatch:
@@ -8,17 +8,14 @@ on:
 
   repository_dispatch:
     types:
-      - run-sbom-scan
+      - run-cbom-scan
 
 permissions:
   contents: write
 
 jobs:
-  generate-sbom-cbom:
+  generate-cbom:
     runs-on: ubuntu-latest
-
-    env:
-      SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
 
     steps:
       - name: Checkout Repository
@@ -29,34 +26,23 @@ jobs:
         with:
           go-version: "1.22"
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install SCANOSS
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install scanoss
-
       - name: Install CryptoFinder
         run: |
           go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
-      - name: Show Versions
+      - name: Show CryptoFinder Version
         run: |
-          python --version
-          scanoss-py --version || true
           crypto-finder version || true
 
-      - name: Create Report Directories
+      - name: Create CBOM Directory
         run: |
-          mkdir -p reports/SBOM
           mkdir -p reports/CBOM
 
-      - name: Scan Repositories
+      - name: Generate CBOMs
         shell: bash
+        env:
+          SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
         run: |
           set -e
 
@@ -69,65 +55,43 @@ jobs:
 
           for REPO in "${REPOS[@]}"
           do
+            REPO=$(echo "$REPO" | xargs)
             NAME=$(basename "$REPO" .git)
 
-            echo ""
-            echo "==========================================="
-            echo "Scanning Repository: $NAME"
-            echo "==========================================="
+            echo "=================================="
+            echo "Scanning: $NAME"
+            echo "=================================="
 
             rm -rf "$NAME"
 
-            if ! git clone --depth 1 "$REPO" "$NAME"; then
-              echo "Failed to clone $NAME"
-              continue
-            fi
+            git clone --depth 1 "$REPO" "$NAME"
 
-            echo "Generating SBOM..."
-
-            if scanoss-py scan \
-                "$NAME" \
-                --format cyclonedx \
-                --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
-            then
-                echo "SBOM generated."
-            else
-                echo "SBOM generation failed."
-            fi
-
-            echo "Generating CBOM..."
-
-            if crypto-finder scan \
-                "$NAME" \
-                --output "reports/CBOM/${TODAY}_${NAME}_cbom.json"
-            then
-                echo "CBOM generated."
-            else
-                echo "CBOM generation failed."
-            fi
+            crypto-finder scan \
+              "$NAME" \
+              --output "reports/CBOM/${TODAY}_${NAME}_cbom.json"
 
             rm -rf "$NAME"
 
           done
 
-      - name: Upload Reports
+      - name: Upload CBOM Reports
         uses: actions/upload-artifact@v4
         with:
-          name: scanoss-reports
-          path: reports/
+          name: cbom-reports
+          path: reports/CBOM
           retention-days: 90
 
-      - name: Commit Reports
+      - name: Commit CBOM Reports
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          git add reports
+          git add reports/CBOM
 
           if git diff --cached --quiet
           then
-            echo "No report changes."
+            echo "No changes."
           else
-            git commit -m "Update SBOM and CBOM reports ($(date +%F))"
+            git commit -m "Update CBOM reports ($(date +%F))"
             git push
           fi
