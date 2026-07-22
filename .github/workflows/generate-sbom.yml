@@ -28,8 +28,9 @@ jobs:
       - name: Install OpenGrep
         run: |
           curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.12.1/install.sh | bash
-          echo "$HOME/.opengrep/bin" >> $GITHUB_PATH
-          echo "$HOME/bin" >> $GITHUB_PATH
+      
+          which opengrep || true
+          find $HOME -name opengrep
 
       - name: Install CryptoFinder
         run: |
