@@ -23,7 +23,10 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           pip3 install scanoss
-
+      - name: Install CryptoFinder
+        run: |
+          go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
       - name: Create reports directory
         run: |
           mkdir -p reports/SBOM
@@ -52,12 +55,24 @@ jobs:
 
             git clone --depth 1 "$REPO" "$NAME"
 
-            scanoss-py scan \
+          #######################################################
+          # Generate SBOM
+          #######################################################
+      
+          scanoss-py scan \
               "$NAME" \
               --format cyclonedx \
               --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
-
-            rm -rf "$NAME"
+      
+          #######################################################
+          # Generate CBOM
+          #######################################################
+      
+          crypto-finder \
+              scan "$NAME" \
+              --output "reports/CBOM/${TODAY}_${NAME}_cbom.json"
+              
+          rm -rf "$NAME"
 
           done
 
