@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:8517e3f2-8443-45d6-b54d-3996e9bf00ae",
+  "serialNumber": "urn:uuid:3591ac90-fa23-422f-b122-e2a252f46e77",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-22T01:07:16Z",
+    "timestamp": "2026-07-22T04:28:49Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -27,6 +27,11 @@
       "purl": "pkg:cpan/LUKKA/PDL",
       "bom-ref": "pkg:cpan/LUKKA/PDL",
       "licenses": [
+        {
+          "license": {
+            "id": "GPL-3.0-only"
+          }
+        },
         {
           "license": {
             "id": "Apache-2.0"
