@@ -1,32 +1,43 @@
-name: Generate CycloneDX CBOM
+name: Generate CycloneDX BOMs
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+  repository_dispatch:
+    types:
+      - run-sbom-scan
 
 permissions:
   contents: write
 
 jobs:
-  generate-cbom:
+  generate-sbom:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-go@v5
+      - name: Setup Go
+        uses: actions/setup-go@v5
         with:
           go-version: "1.22"
 
       - name: Install OpenGrep
         run: |
           curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.25.0/install.sh | bash
-
           echo "$HOME/.opengrep/cli/latest" >> $GITHUB_PATH
 
       - name: Install CryptoFinder
         run: |
           go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Install SCANOSS CLI
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install scanoss
 
       - name: Verify Installation
         run: |
@@ -38,11 +49,15 @@ jobs:
           which crypto-finder
           crypto-finder version
 
-      - name: Create Output Directory
+          which scanoss-py
+          scanoss-py --help
+
+      - name: Create Reports Directory
         run: |
+          mkdir -p reports/SBOM
           mkdir -p reports/CBOM
 
-      - name: Generate CBOM
+      - name: Generate SBOM and CBOM
         env:
           SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
         run: |
@@ -59,7 +74,16 @@ jobs:
           do
             NAME=$(basename "$REPO" .git)
 
+            echo "=================================="
+            echo "Scanning: $NAME"
+            echo "=================================="
+
             git clone --depth 1 "$REPO" "$NAME"
+
+            scanoss-py scan \
+              "$NAME" \
+              --format cyclonedx \
+              --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
 
             crypto-finder scan \
               --api-key "$SCANOSS_API_KEY" \
@@ -72,13 +96,14 @@ jobs:
 
       - name: Commit Reports
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-          git add reports/CBOM
+          git add reports
 
-          if ! git diff --cached --quiet
-          then
-            git commit -m "Update CBOM reports"
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Add CycloneDX reports"
             git push
           fi
