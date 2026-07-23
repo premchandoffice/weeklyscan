@@ -1,0 +1,84 @@
+name: Generate CycloneDX CBOM
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-cbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Install OpenGrep
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.25.0/install.sh | bash
+
+          echo "$HOME/.opengrep/cli/latest" >> $GITHUB_PATH
+
+      - name: Install CryptoFinder
+        run: |
+          go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Verify Installation
+        run: |
+          export PATH="$HOME/.opengrep/cli/latest:$PATH"
+
+          which opengrep
+          opengrep --version
+
+          which crypto-finder
+          crypto-finder version
+
+      - name: Create Output Directory
+        run: |
+          mkdir -p reports/CBOM
+
+      - name: Generate CBOM
+        env:
+          SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
+        run: |
+          export PATH="$HOME/.opengrep/cli/latest:$PATH"
+
+          TODAY=$(date +%F)
+
+          REPOS=(
+            "https://github.com/premchandoffice/integration-github-actions.git"
+            "https://github.com/gayathri02-02/project1.git"
+          )
+
+          for REPO in "${REPOS[@]}"
+          do
+            NAME=$(basename "$REPO" .git)
+
+            git clone --depth 1 "$REPO" "$NAME"
+
+            crypto-finder scan \
+              --api-key "$SCANOSS_API_KEY" \
+              --format cyclonedx \
+              --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
+              "$NAME"
+
+            rm -rf "$NAME"
+          done
+
+      - name: Commit Reports
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add reports/CBOM
+
+          if ! git diff --cached --quiet
+          then
+            git commit -m "Update CBOM reports"
+            git push
+          fi
