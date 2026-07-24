@@ -1,0 +1,20 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:bb446c5f-bf79-42e8-9704-7c9843926ac1",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-24T01:07:47Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "group": "SCANOSS",
+          "name": "crypto-finder",
+          "version": "dev"
+        }
+      ]
+    }
+  },
+  "components": []
+}
