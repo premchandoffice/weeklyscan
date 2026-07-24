@@ -67,7 +67,7 @@ jobs:
 
           REPOS=(
             "https://github.com/premchandoffice/integration-github-actions.git"
-            "https://github.com/gayathri02-02/project1.git"
+            "https://github.com/IBM/CBOM.git"
           )
 
           for REPO in "${REPOS[@]}"
