@@ -1,0 +1,87 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:ae87fa5a-d486-477e-812f-d829028a5771",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-24T07:01:24Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "group": "SCANOSS",
+          "name": "crypto-finder",
+          "version": "dev"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "925b03eb-e715-4628-bd17-c9f83c80d75b",
+      "type": "cryptographic-asset",
+      "name": "MD5",
+      "properties": [
+        {
+          "name": "scanoss:cryptoFunction",
+          "value": "digest"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 1,
+                "value": "scanoss:ruleid,hashlib.algorithm.hash.md5.python.hashlib.algorithm.hash.md5"
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/scanoss/scanners/scanner_hfh.py",
+            "line": 481,
+            "additionalContext": "scanoss:match,return hashlib.md5(file_path.read_bytes()).hexdigest()"
+          },
+          {
+            "location": "src/scanoss/spdxlite.py",
+            "line": 355,
+            "additionalContext": "scanoss:match,md5hex = hashlib.md5(f'{raw_data}-{now}'.encode('utf-8')).hexdigest()"
+          },
+          {
+            "location": "src/scanoss/spdxlite.py",
+            "line": 460,
+            "additionalContext": "scanoss:match,purl_hash = hashlib.md5(purl_ver.encode('utf-8')).hexdigest()"
+          },
+          {
+            "location": "src/scanoss/winnowing.py",
+            "line": 452,
+            "additionalContext": "scanoss:match,return hashlib.md5(opposite_contents).hexdigest()"
+          },
+          {
+            "location": "src/scanoss/winnowing.py",
+            "line": 466,
+            "additionalContext": "scanoss:match,file_md5 = hashlib.md5(contents).hexdigest()"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "128",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "x86_64",
+          "cryptoFunctions": [
+            "digest"
+          ]
+        },
+        "oid": "1.2.840.113549.2.5"
+      }
+    }
+  ]
+}

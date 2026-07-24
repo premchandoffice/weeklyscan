@@ -1,0 +1,54 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:c4c96350-4281-41a6-a11c-33f70e5df5f2",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-24T07:01:08Z",
+    "tools": [
+      {
+        "vendor": "SCANOSS",
+        "name": "scanoss-py",
+        "version": "1.54.2"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "NOASSERTION",
+      "version": "NOASSERTION"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "scanoss.py",
+      "publisher": "scanoss",
+      "version": "v1.53.1",
+      "purl": "pkg:github/scanoss/scanoss.py",
+      "bom-ref": "pkg:github/scanoss/scanoss.py",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "scanoss-winnowing.py",
+      "publisher": "scanoss",
+      "version": "v0.7.0",
+      "purl": "pkg:github/scanoss/scanoss-winnowing.py",
+      "bom-ref": "pkg:github/scanoss/scanoss-winnowing.py",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  ],
+  "vulnerabilities": []
+}
