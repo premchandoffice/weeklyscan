@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:770ce1b1-f31c-48d5-9d79-2e5c98e0d2c0",
+  "serialNumber": "urn:uuid:710c038c-d17d-412d-9b06-a7ff529a1ad7",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-27T16:05:07Z",
+    "timestamp": "2026-07-27T17:53:34Z",
     "tools": {
       "components": [
         {
@@ -18,7 +18,7 @@
   },
   "components": [
     {
-      "bom-ref": "1a434078-2724-47f5-9afc-d85a07749a08",
+      "bom-ref": "d412c7c4-ba54-4954-8642-42617d250b30",
       "type": "cryptographic-asset",
       "name": "MD5",
       "properties": [
