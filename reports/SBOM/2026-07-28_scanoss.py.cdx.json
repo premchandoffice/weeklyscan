@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:07d8590f-5e99-4edd-8e1d-62e9686be4e0",
+  "serialNumber": "urn:uuid:105de8a0-6be0-4ca6-af56-544a6a54a033",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-28T20:01:09Z",
+    "timestamp": "2026-07-28T21:18:14Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -23,7 +23,7 @@
       "type": "library",
       "name": "scanoss.py",
       "publisher": "scanoss",
-      "version": "v1.46.0",
+      "version": "v1.53.1",
       "purl": "pkg:github/scanoss/scanoss.py",
       "bom-ref": "pkg:github/scanoss/scanoss.py",
       "licenses": [
