@@ -62,6 +62,9 @@ jobs:
       - name: Generate SBOM and CBOM
         env:
           SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
+          DTRACK_URL: ${{ secrets.DTRACK_URL }}
+          DTRACK_API_KEY: ${{ secrets.DTRACK_API_KEY }}
+          DTRACK_PROJECT_UUID: ${{ secrets.DTRACK_PROJECT_UUID }}
         run: |
           export PATH="$HOME/.opengrep/cli/latest:$PATH"
 
@@ -86,6 +89,22 @@ jobs:
               "$NAME" \
               --format cyclonedx \
               --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
+          echo "Uploading SBOM to Dependency-Track..."
+          
+          HTTP_CODE=$(curl -s -o response.json -w "%{http_code}" \
+            -X POST "${DTRACK_URL}/api/v1/bom" \
+            -H "X-Api-Key: ${DTRACK_API_KEY}" \
+            -F "project=${DTRACK_PROJECT_UUID}" \
+            -F "bom=@reports/SBOM/${TODAY}_${NAME}.cdx.json")
+          
+          if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "201" ]; then
+              echo "✅ SBOM uploaded successfully for ${NAME}"
+          else
+              echo "❌ Upload failed for ${NAME}"
+              echo "HTTP Status: ${HTTP_CODE}"
+              cat response.json
+              exit 1
+          fi
 
             crypto-finder scan \
               --api-key "$SCANOSS_API_KEY" \
