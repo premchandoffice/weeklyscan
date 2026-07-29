@@ -13,7 +13,9 @@ permissions:
 
 jobs:
   generate-sbom:
-    runs-on: ubuntu-latest
+    runs-on: 
+    - self-hosted
+    - dependency-track
 
     steps:
       - name: Checkout Repository
