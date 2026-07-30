@@ -28,8 +28,16 @@ jobs:
 
       - name: Install OpenGrep
         run: |
-          curl -fsSL https://raw.githubusercontent.com/opengrep/opengrep/v1.25.0/install.sh | bash
-          echo "$HOME/.opengrep/cli/latest" >> $GITHUB_PATH
+          VERSION=1.25.0
+
+          curl -L \
+            -o opengrep.tar.gz \
+            https://github.com/opengrep/opengrep/releases/download/v${VERSION}/opengrep_linux_amd64.tar.gz
+      
+          tar -xzf opengrep.tar.gz
+          chmod +x opengrep
+          sudo mv opengrep /usr/local/bin/
+          opengrep --version
 
       - name: Install CryptoFinder
         run: |
