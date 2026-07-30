@@ -36,14 +36,18 @@ jobs:
           go install github.com/scanoss/crypto-finder/cmd/crypto-finder@latest
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
-      - name: Install SCANOSS CLI
+      - name: Setup Python Virtual Environment
         run: |
-          python3 -m pip install --upgrade pip
-          pip3 install scanoss
+          python3 -m venv .venv
+          source .venv/bin/activate
+      
+          python -m pip install --upgrade pip
+          pip install scanoss
 
       - name: Verify Installation
         run: |
           export PATH="$HOME/.opengrep/cli/latest:$PATH"
+          source .venv/bin/activate
 
           which opengrep
           opengrep --version
@@ -66,6 +70,7 @@ jobs:
           DTRACK_API_KEY: ${{ secrets.DTRACK_API_KEY }}
           DTRACK_PROJECT_UUID: ${{ secrets.DTRACK_PROJECT_UUID }}
         run: |
+          source .venv/bin/activate
           export PATH="$HOME/.opengrep/cli/latest:$PATH"
 
           TODAY=$(date +%F)
