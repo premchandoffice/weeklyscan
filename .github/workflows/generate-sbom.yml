@@ -77,7 +77,7 @@ jobs:
 
           REPOS=(
             "https://github.com/premchandoffice/integration-github-actions.git"
-            "https://github.com/scanoss/scanoss.py.git"
+            "https://github.com/openssl/openssl.git"
           )
 
           for REPO in "${REPOS[@]}"
