@@ -133,3 +133,7 @@ jobs:
             git commit -m "Add CycloneDX reports"
             git push
           fi
+      - name: Sync dashboard
+        run: |
+          cd /home/lyraadmin/lyra_app
+          docker compose exec -T web python scripts/sync_weeklyscan.py
