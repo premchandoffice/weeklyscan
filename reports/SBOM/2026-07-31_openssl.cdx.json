@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.4",
-  "serialNumber": "urn:uuid:f335cbf5-8c13-48f6-8f15-408b7e913ecb",
+  "serialNumber": "urn:uuid:f25badf9-0c3c-4da6-a55e-2690d82d8a50",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-31T05:45:31Z",
+    "timestamp": "2026-07-31T10:30:04Z",
     "tools": [
       {
         "vendor": "SCANOSS",
@@ -29,12 +29,7 @@
       "licenses": [
         {
           "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "GPL-1.0-or-later"
           }
         },
         {
@@ -44,7 +39,12 @@
         },
         {
           "license": {
-            "id": "GPL-1.0-or-later"
+            "id": "Artistic-1.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -117,6 +117,26 @@
     },
     {
       "type": "library",
+      "name": "openssl3-win-build",
+      "publisher": "kiyolee",
+      "version": "v4.0.0",
+      "purl": "pkg:github/kiyolee/openssl3-win-build",
+      "bom-ref": "pkg:github/kiyolee/openssl3-win-build",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "openssl",
       "publisher": "hexchills",
       "version": "926c698",
@@ -125,12 +145,7 @@
       "licenses": [
         {
           "license": {
-            "id": "OpenSSL"
-          }
-        },
-        {
-          "license": {
-            "name": "bcrypt-Solar-Designer"
+            "id": "RSA-MD"
           }
         },
         {
@@ -140,27 +155,7 @@
         },
         {
           "license": {
-            "name": "Ferguson-Twofish"
-          }
-        },
-        {
-          "license": {
-            "id": "MS-PL"
-          }
-        },
-        {
-          "license": {
-            "name": "SSLeay-standalone"
-          }
-        },
-        {
-          "license": {
-            "id": "RSA-MD"
-          }
-        },
-        {
-          "license": {
-            "name": "OpenSSL-standalone"
+            "id": "Apache-2.0"
           }
         },
         {
@@ -170,12 +165,37 @@
         },
         {
           "license": {
-            "id": "Apache-2.0"
+            "name": "bcrypt-Solar-Designer"
+          }
+        },
+        {
+          "license": {
+            "name": "OpenSSL-standalone"
+          }
+        },
+        {
+          "license": {
+            "name": "SSLeay-standalone"
+          }
+        },
+        {
+          "license": {
+            "id": "OpenSSL"
+          }
+        },
+        {
+          "license": {
+            "name": "Ferguson-Twofish"
           }
         },
         {
           "license": {
             "name": "Gutmann"
+          }
+        },
+        {
+          "license": {
+            "id": "MS-PL"
           }
         }
       ]
@@ -191,32 +211,27 @@
     },
     {
       "type": "library",
-      "name": "openssl3-win-build",
-      "publisher": "kiyolee",
-      "version": "v4.0.0",
-      "purl": "pkg:github/kiyolee/openssl3-win-build",
-      "bom-ref": "pkg:github/kiyolee/openssl3-win-build",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        },
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "libopenssl-dev",
       "publisher": "DreamConnected",
       "version": "2025-05-09",
       "purl": "pkg:github/dreamconnected/libopenssl-dev",
       "bom-ref": "pkg:github/dreamconnected/libopenssl-dev",
       "licenses": []
+    },
+    {
+      "type": "library",
+      "name": "openssls",
+      "publisher": "MrE-Fog",
+      "version": "fbi",
+      "purl": "pkg:github/mre-fog/openssls",
+      "bom-ref": "pkg:github/mre-fog/openssls",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
     },
     {
       "type": "library",
@@ -243,12 +258,7 @@
       "licenses": [
         {
           "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "GPL-1.0-or-later"
           }
         },
         {
@@ -258,19 +268,9 @@
         },
         {
           "license": {
-            "id": "GPL-1.0-or-later"
+            "id": "Artistic-1.0"
           }
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "openssls",
-      "publisher": "MrE-Fog",
-      "version": "fbi",
-      "purl": "pkg:github/mre-fog/openssls",
-      "bom-ref": "pkg:github/mre-fog/openssls",
-      "licenses": [
+        },
         {
           "license": {
             "id": "Apache-2.0"
@@ -297,12 +297,7 @@
       "licenses": [
         {
           "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "GPL-1.0-or-later"
           }
         },
         {
@@ -312,7 +307,12 @@
         },
         {
           "license": {
-            "id": "GPL-1.0-or-later"
+            "id": "Artistic-1.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -349,21 +349,6 @@
     },
     {
       "type": "library",
-      "name": "experimental",
-      "publisher": "openssl",
-      "version": "8c2e588",
-      "purl": "pkg:github/openssl/experimental",
-      "bom-ref": "pkg:github/openssl/experimental",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "github.com/quictls/openssl",
       "publisher": "",
       "version": "v0.0.0-20240130153626-62ecad537806",
@@ -372,12 +357,7 @@
       "licenses": [
         {
           "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "GPL-1.0-or-later"
           }
         },
         {
@@ -387,7 +367,27 @@
         },
         {
           "license": {
-            "id": "GPL-1.0-or-later"
+            "id": "Artistic-1.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "experimental",
+      "publisher": "openssl",
+      "version": "8c2e588",
+      "purl": "pkg:github/openssl/experimental",
+      "bom-ref": "pkg:github/openssl/experimental",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -409,6 +409,36 @@
     },
     {
       "type": "library",
+      "name": "openssl",
+      "publisher": "ibmruntimes",
+      "version": "openssl-3.0.15+CVEs2",
+      "purl": "pkg:github/ibmruntimes/openssl",
+      "bom-ref": "pkg:github/ibmruntimes/openssl",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "turnkey-triumph-326606_openssl",
+      "publisher": "samkenxstream",
+      "version": "v3.1.1",
+      "purl": "pkg:github/samkenxstream/turnkey-triumph-326606_openssl",
+      "bom-ref": "pkg:github/samkenxstream/turnkey-triumph-326606_openssl",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "skynet_fly",
       "publisher": "huahua132",
       "version": "5897396",
@@ -418,21 +448,6 @@
         {
           "license": {
             "id": "MIT"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "openssl",
-      "publisher": "ibmruntimes",
-      "version": "openssl-3.0.12+CVEs2",
-      "purl": "pkg:github/ibmruntimes/openssl",
-      "bom-ref": "pkg:github/ibmruntimes/openssl",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
           }
         }
       ]
@@ -459,21 +474,6 @@
     },
     {
       "type": "library",
-      "name": "turnkey-triumph-326606_openssl",
-      "publisher": "samkenxstream",
-      "version": "v3.1.1",
-      "purl": "pkg:github/samkenxstream/turnkey-triumph-326606_openssl",
-      "bom-ref": "pkg:github/samkenxstream/turnkey-triumph-326606_openssl",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "openssl",
       "publisher": "gitlab-org/build/omnibus-mirror",
       "version": "openssl-3.0.3",
@@ -491,12 +491,12 @@
       "licenses": [
         {
           "license": {
-            "id": "Apache-2.0"
+            "id": "MIT"
           }
         },
         {
           "license": {
-            "id": "MIT"
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -554,24 +554,6 @@
     },
     {
       "type": "library",
-      "name": "openssl",
-      "publisher": "majek",
-      "version": "2f58cda",
-      "purl": "pkg:github/majek/openssl",
-      "bom-ref": "pkg:github/majek/openssl",
-      "licenses": []
-    },
-    {
-      "type": "library",
-      "name": "packages-ssl",
-      "publisher": "SWI-Prolog",
-      "version": "V5.4.0",
-      "purl": "pkg:github/swi-prolog/packages-ssl",
-      "bom-ref": "pkg:github/swi-prolog/packages-ssl",
-      "licenses": []
-    },
-    {
-      "type": "library",
       "name": "apexdc",
       "publisher": "apexdc",
       "version": "1.6.5.source",
@@ -584,6 +566,15 @@
           }
         }
       ]
+    },
+    {
+      "type": "library",
+      "name": "openssl",
+      "publisher": "majek",
+      "version": "2f58cda",
+      "purl": "pkg:github/majek/openssl",
+      "bom-ref": "pkg:github/majek/openssl",
+      "licenses": []
     },
     {
       "type": "library",
@@ -604,7 +595,37 @@
       "licenses": [
         {
           "license": {
+            "id": "MIT"
+          }
+        },
+        {
+          "license": {
             "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "github.com/cpacia/go-libtor",
+      "publisher": "",
+      "version": "v1.0.138-0.20191212053219-8e4305ea6496",
+      "purl": "pkg:golang/github.com/cpacia/go-libtor",
+      "bom-ref": "pkg:golang/github.com/cpacia/go-libtor",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        },
+        {
+          "license": {
+            "id": "OpenSSL"
           }
         },
         {
@@ -631,36 +652,6 @@
       "purl": "pkg:github/barrelfishos/barrelfish",
       "bom-ref": "pkg:github/barrelfishos/barrelfish",
       "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "github.com/cpacia/go-libtor",
-      "publisher": "",
-      "version": "v1.0.138-0.20191212053219-8e4305ea6496",
-      "purl": "pkg:golang/github.com/cpacia/go-libtor",
-      "bom-ref": "pkg:golang/github.com/cpacia/go-libtor",
-      "licenses": [
-        {
-          "license": {
-            "id": "OpenSSL"
-          }
-        },
-        {
-          "license": {
-            "id": "ISC"
-          }
-        },
-        {
-          "license": {
-            "id": "BSD-3-Clause"
-          }
-        },
         {
           "license": {
             "id": "MIT"
@@ -697,6 +688,15 @@
           }
         }
       ]
+    },
+    {
+      "type": "library",
+      "name": "packages-ssl",
+      "publisher": "SWI-Prolog",
+      "version": "V5.4.0",
+      "purl": "pkg:github/swi-prolog/packages-ssl",
+      "bom-ref": "pkg:github/swi-prolog/packages-ssl",
+      "licenses": []
     },
     {
       "type": "library",
@@ -753,12 +753,7 @@
       "licenses": [
         {
           "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "GPL-1.0-or-later"
           }
         },
         {
@@ -768,7 +763,12 @@
         },
         {
           "license": {
-            "id": "GPL-1.0-or-later"
+            "id": "Artistic-1.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -888,17 +888,17 @@
       "licenses": [
         {
           "license": {
-            "id": "BSD-2-Clause"
-          }
-        },
-        {
-          "license": {
             "name": "GPL-2.0 WITH Linux-syscall-note"
           }
         },
         {
           "license": {
             "name": "Apache-2.0 WITH LLVM-exception"
+          }
+        },
+        {
+          "license": {
+            "id": "BSD-2-Clause"
           }
         }
       ]
@@ -958,12 +958,22 @@
       "licenses": [
         {
           "license": {
+            "id": "LGPL-2.1-or-later"
+          }
+        },
+        {
+          "license": {
+            "id": "Zlib"
+          }
+        },
+        {
+          "license": {
             "id": "BSD-2-Clause"
           }
         },
         {
           "license": {
-            "name": "Apache-2.0 WITH LLVM-exception"
+            "id": "Apache-2.0"
           }
         },
         {
@@ -978,12 +988,12 @@
         },
         {
           "license": {
-            "id": "curl"
+            "id": "LGPL-2.1-only"
           }
         },
         {
           "license": {
-            "id": "LGPL-2.1-only"
+            "id": "curl"
           }
         },
         {
@@ -993,17 +1003,22 @@
         },
         {
           "license": {
-            "id": "Zlib"
+            "name": "Apache-2.0 WITH LLVM-exception"
           }
-        },
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mininodejs20",
+      "publisher": "weolar_admin",
+      "version": "07e85ae",
+      "purl": "pkg:gitee/weolar_admin/mininodejs20",
+      "bom-ref": "pkg:gitee/weolar_admin/mininodejs20",
+      "licenses": [
         {
           "license": {
-            "id": "LGPL-2.1-or-later"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
+            "id": "MIT"
           }
         }
       ]
@@ -1012,7 +1027,7 @@
       "type": "library",
       "name": "perl-text-template",
       "publisher": "mschout",
-      "version": "v1.48",
+      "version": "v1.56",
       "purl": "pkg:github/mschout/perl-text-template",
       "bom-ref": "pkg:github/mschout/perl-text-template",
       "licenses": []
@@ -1046,36 +1061,6 @@
     },
     {
       "type": "library",
-      "name": "github.com/akamai/openssl",
-      "publisher": "",
-      "version": "v0.0.0-20220322130815-9e1a54f4a187",
-      "purl": "pkg:golang/github.com/akamai/openssl",
-      "bom-ref": "pkg:golang/github.com/akamai/openssl",
-      "licenses": [
-        {
-          "license": {
-            "id": "Artistic-1.0"
-          }
-        },
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        },
-        {
-          "license": {
-            "id": "GPL-1.0-only"
-          }
-        },
-        {
-          "license": {
-            "id": "GPL-1.0-or-later"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "intel-sgx-ssl",
       "publisher": "intel",
       "version": "b9c7687",
@@ -1091,6 +1076,36 @@
     },
     {
       "type": "library",
+      "name": "github.com/akamai/openssl",
+      "publisher": "",
+      "version": "v0.0.0-20220322130815-9e1a54f4a187",
+      "purl": "pkg:golang/github.com/akamai/openssl",
+      "bom-ref": "pkg:golang/github.com/akamai/openssl",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-1.0-or-later"
+          }
+        },
+        {
+          "license": {
+            "id": "GPL-1.0-only"
+          }
+        },
+        {
+          "license": {
+            "id": "Artistic-1.0"
+          }
+        },
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
       "name": "warcraftiii_dll_126-xxx",
       "publisher": "unrealkaraulov",
       "version": "d8ba434",
@@ -1100,21 +1115,6 @@
         {
           "license": {
             "id": "Unlicense"
-          }
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "mininodejs20",
-      "publisher": "weolar_admin",
-      "version": "07e85ae",
-      "purl": "pkg:gitee/weolar_admin/mininodejs20",
-      "bom-ref": "pkg:gitee/weolar_admin/mininodejs20",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
           }
         }
       ]
@@ -1153,12 +1153,12 @@
       "licenses": [
         {
           "license": {
-            "id": "Apache-2.0"
+            "id": "Artistic-1.0"
           }
         },
         {
           "license": {
-            "id": "Artistic-1.0"
+            "id": "Apache-2.0"
           }
         }
       ]
@@ -1693,23 +1693,6 @@
       ]
     },
     {
-      "id": "CVE-2025-4575",
-      "source": {
-        "name": "NVD",
-        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-4575"
-      },
-      "ratings": [
-        {
-          "severity": "medium"
-        }
-      ],
-      "affects": [
-        {
-          "ref": "pkg:github/openssl/openssl"
-        }
-      ]
-    },
-    {
       "id": "CVE-2025-11187",
       "source": {
         "name": "NVD",
@@ -1901,6 +1884,23 @@
       "source": {
         "name": "NVD",
         "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22796"
+      },
+      "ratings": [
+        {
+          "severity": "medium"
+        }
+      ],
+      "affects": [
+        {
+          "ref": "pkg:github/openssl/openssl"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2025-4575",
+      "source": {
+        "name": "NVD",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-4575"
       },
       "ratings": [
         {
