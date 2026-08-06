@@ -42,18 +42,20 @@ jobs:
 
       - name: Setup Python Virtual Environment
         run: |
-          if [ -d ".venv" ]; then
-            echo "venv already exists, skipping creation"
-          else
+          if [ ! -d ".venv" ]; then
             python3 -m venv .venv
           fi
+      
           source .venv/bin/activate
+      
           python -m pip install --upgrade pip
-          pip install scanoss
-          pip install anthropic
-          pip install markdown
-          pip install jinja2
-          pip install weasyprint
+      
+          pip install \
+            scanoss \
+            anthropic \
+            markdown \
+            jinja2 \
+            weasyprint
 
       - name: Verify Installation
         run: |
@@ -71,7 +73,7 @@ jobs:
           mkdir -p reports/SBOM
           mkdir -p reports/CBOM
 
-      - name: Generate SBOM and CBOM
+      - name: Generate Reports
         env:
           SCANOSS_API_KEY: ${{ secrets.SCANOSS_API_KEY }}
           DTRACK_URL: ${{ secrets.DTRACK_URL }}
@@ -79,54 +81,92 @@ jobs:
           DTRACK_PROJECT_UUID: ${{ secrets.DTRACK_PROJECT_UUID }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
         run: |
+          set -euo pipefail
+      
           source .venv/bin/activate
           export PATH="$HOME/.opengrep/cli/latest:$PATH"
+      
           TODAY=$(date +%F)
+      
+          mkdir -p reports/SBOM
+          mkdir -p reports/CBOM
+          mkdir -p reports/HTML
+          mkdir -p reports/PDF
+      
           REPOS=(
             "https://github.com/premchandoffice/integration-github-actions.git"
             "https://github.com/openssl/openssl.git"
           )
+      
           for REPO in "${REPOS[@]}"
           do
             NAME=$(basename "$REPO" .git)
+      
             echo "=================================="
-            echo "Scanning: $NAME"
+            echo "Scanning $NAME"
             echo "=================================="
+      
+            rm -rf "$NAME"
+      
             git clone --depth 1 "$REPO" "$NAME"
+      
+            #################################################
+            # Generate SBOM
+            #################################################
+      
             scanoss-py scan \
               "$NAME" \
               --format cyclonedx \
               --output "reports/SBOM/${TODAY}_${NAME}.cdx.json"
-          echo "Uploading SBOM to Dependency-Track..."
-
-          HTTP_CODE=$(curl -s -o response.json -w "%{http_code}" \
-            -X POST "${DTRACK_URL}/api/v1/bom" \
-            -H "X-Api-Key: ${DTRACK_API_KEY}" \
-            -F "project=${DTRACK_PROJECT_UUID}" \
-            -F "bom=@reports/SBOM/${TODAY}_${NAME}.cdx.json")
-
-          if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "201" ]; then
-              echo "✅ SBOM uploaded successfully for ${NAME}"
-          else
-              echo "❌ Upload failed for ${NAME}"
-              echo "HTTP Status: ${HTTP_CODE}"
-              cat response.json
-              exit 1
-          fi
+      
+            test -f "reports/SBOM/${TODAY}_${NAME}.cdx.json"
+      
+            #################################################
+            # Upload SBOM to Dependency-Track
+            #################################################
+      
+            curl -fsS \
+              -X POST "${DTRACK_URL}/api/v1/bom" \
+              -H "X-Api-Key: ${DTRACK_API_KEY}" \
+              -F "project=${DTRACK_PROJECT_UUID}" \
+              -F "bom=@reports/SBOM/${TODAY}_${NAME}.cdx.json"
+      
+            #################################################
+            # Generate CBOM
+            #################################################
+      
             crypto-finder scan \
               --api-key "$SCANOSS_API_KEY" \
               --format cyclonedx \
               --output "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
               "$NAME"
-              
+      
+            test -f "reports/CBOM/${TODAY}_${NAME}.cbom.json"
+      
+            #################################################
+            # Generate AI Reports
+            #################################################
+      
             python scripts/report_generator.py \
               --sbom "reports/SBOM/${TODAY}_${NAME}.cdx.json" \
               --cbom "reports/CBOM/${TODAY}_${NAME}.cbom.json" \
               --repo "$NAME"
-              
+      
+            #################################################
+            # Cleanup
+            #################################################
+      
             rm -rf "$NAME"
+      
           done
 
+      - name: Upload Reports as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: enterprise-audit-reports
+          path: reports
+          retention-days: 90
+    
       - name: Commit Reports
         run: |
           git config user.name "github-actions"
