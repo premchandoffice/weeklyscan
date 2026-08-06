@@ -1,0 +1,39 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:c1ace5b9-2dcf-499e-a4c2-35e74da70693",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-06T06:21:36Z",
+    "tools": [
+      {
+        "vendor": "SCANOSS",
+        "name": "scanoss-py",
+        "version": "1.54.2"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "NOASSERTION",
+      "version": "NOASSERTION"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "scanoss.js",
+      "publisher": "scanoss",
+      "version": "v0.11.1",
+      "purl": "pkg:github/scanoss/scanoss.js",
+      "bom-ref": "pkg:github/scanoss/scanoss.js",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  ],
+  "vulnerabilities": []
+}
